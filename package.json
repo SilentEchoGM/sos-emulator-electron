@@ -1,0 +1,38 @@
+{
+  "name": "sos-emulator",
+  "version": "0.0.1",
+  "description": "An emulator for the events produced by the SOS plugin for Bakkesmod",
+  "main": "build/electron/main.js",
+  "author": {
+    "name": "Silent Echo",
+    "email": "silent@silentecho.eu",
+    "url": "http://twitter.com/silentechode"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "^16.0.5",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "prestart": "run-s -l build:electron",
+    "start": "run-p -l start:nodemon start:sveltekit build:electron:watch",
+    "start:nodemon": "nodemon",
+    "start:electron": "cross-env NODE_ENV=development electron .",
+    "clean:build:electron": "node scripts/cleanElectronBuild",
+    "build:electron": "run-s clean:build:electron build:electron:dev",
+    "build:electron:dev": "tsc",
+    "build:electron:watch": "run-s \"build:electron:dev -- {1} {2}\" -- -w --preserveWatchOutput",
+    "start:sveltekit": "cd svelte && npm run dev"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "build/electron"
+    ],
+    "exec": "npm run start:electron",
+    "delay": 12000
+  }
+}
