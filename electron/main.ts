@@ -14,6 +14,7 @@ const createWindow = () => {
     },
     autoHideMenuBar: true,
     roundedCorners: true,
+    title: "SOS Emulator",
   });
 
   win.loadURL(dev ? "http://localhost:3000" : "http://www.google.com");
