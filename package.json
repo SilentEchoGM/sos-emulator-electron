@@ -21,20 +21,23 @@
   },
   "scripts": {
     "prestart": "run-s -l build:electron",
-    "start": "run-p -l start:nodemon start:sveltekit build:electron:watch",
-    "start:nodemon": "nodemon",
+    "start": "nodemon",
+    "start:dev": "run-p -l start:sveltekit start:electron build:electron:watch",
     "start:electron": "cross-env NODE_ENV=development electron .",
     "clean:build:electron": "node scripts/cleanElectronBuild",
-    "build:electron": "run-s clean:build:electron build:electron:dev",
+    "build:electron": "run-s clean:build:electron build:electron:dev copy:electron:assets",
     "build:electron:dev": "tsc",
     "build:electron:watch": "run-s \"build:electron:dev -- {1} {2}\" -- -w --preserveWatchOutput",
+    "copy:electron:assets": "node scripts/postElectronBuild",
     "start:sveltekit": "cd svelte && npm run dev"
   },
   "nodemonConfig": {
     "watch": [
-      "build/electron"
+      "build/electron",
+      "svelte/src/backend",
+      "svelte/src/hooks.ts"
     ],
-    "exec": "npm run start:electron",
+    "exec": "npm run start:dev",
     "delay": 2000
   }
 }
