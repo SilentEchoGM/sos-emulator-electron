@@ -1,6 +1,7 @@
 import type { SOS } from "$lib/types/sosPluginEvents";
 import { v4 } from "uuid";
 import { getLocation } from "./utils/getLocation";
+import { getPlayerStore } from "./utils/getPlayerStore";
 
 type Options = {
   players: SOS.PlayersStore;
@@ -17,7 +18,7 @@ type Options = {
 };
 
 export const getUpdate = ({
-  players = {},
+  players = getPlayerStore(),
   arena = "Stadium_P",
   isOT = false,
   isReplay = false,
