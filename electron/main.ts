@@ -25,7 +25,24 @@ const createWindow = () => {
     title: "SOS Emulator",
   });
 
-  win.loadURL(dev ? "http://localhost:3000" : "http://www.google.com");
+  win
+    .loadURL(dev ? "http://localhost:3000" : "http://www.google.com")
+    .catch((err) => {
+      if (err) {
+        setTimeout(() => {
+          win
+            .loadURL(dev ? "http://localhost:3000" : "http://www.google.com")
+            .catch((err) => {
+              log.error(
+                "Retried once, looks like the port is blocked or the Svelte dev server is having an issue.",
+                {
+                  err,
+                }
+              );
+            });
+        }, 3000);
+      }
+    });
 };
 
 app.whenReady().then(createWindow);
