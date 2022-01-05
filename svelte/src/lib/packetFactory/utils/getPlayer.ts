@@ -23,7 +23,7 @@ export const getPlayer = (
   return {
     assists: 0,
     attacker: "",
-    boost: 0,
+    boost: Math.floor(Math.random() * 101),
     cartouches: 0,
     demos: 0,
     goals: 0,
