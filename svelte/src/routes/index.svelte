@@ -41,6 +41,7 @@
       scorer: type === "game:goal_scored" ? scorer : null,
       assister:
         type === "game:goal_scored" && Math.random() < 0.5 ? assister : null,
+      mainTarget: type === "game:statfeed_event" ? scorer : null,
     };
 
     log.info("Packet data:", {
