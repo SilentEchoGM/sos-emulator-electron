@@ -10,7 +10,7 @@ const names = ["Darman", "Niner", "Fi", "Atin", "Etain", "Bardan", "Kal"];
 export const getPlayerStore = (players: SOS.PlayersStore = {}) => {
   const neededCount = 6 - keys(players).length;
   return pipe(
-    new Array(6 - keys(players).length),
+    new Array(neededCount),
     A.reduceWithIndex(players, (i, acc, _) => {
       const name = names[neededCount - i];
       const player = getPlayer(name, TeamEnum[TeamEnum[i % 2]], acc);
