@@ -13,7 +13,7 @@ export const getPlayerStore = (players: SOS.PlayersStore = {}) => {
     new Array(6 - keys(players).length),
     A.reduceWithIndex(players, (i, acc, _) => {
       const name = names[neededCount - i];
-      const player = getPlayer(name, TeamEnum[(i % 2) + ""], acc);
+      const player = getPlayer(name, TeamEnum[TeamEnum[i % 2]], acc);
       return {
         ...acc,
         [player.id]: player,
