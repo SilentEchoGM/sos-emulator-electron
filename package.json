@@ -9,13 +9,15 @@
     "url": "http://twitter.com/silentechode"
   },
   "dependencies": {
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "socket.io-client": "^4.4.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "electron": "^16.0.5",
     "nodemon": "^2.0.15",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "sudo-prompt": "^9.2.1"
   },
   "scripts": {
     "prestart": "run-s -l build:electron",
@@ -33,6 +35,6 @@
       "build/electron"
     ],
     "exec": "npm run start:electron",
-    "delay": 12000
+    "delay": 2000
   }
 }

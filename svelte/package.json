@@ -2,6 +2,7 @@
   "name": "svelte",
   "version": "0.0.1",
   "scripts": {
+    "start": "cd .. & npm start",
     "dev": "svelte-kit dev",
     "prebuild": "node ../scripts/cleanSvelteBuild",
     "build": "svelte-kit build",
@@ -14,6 +15,7 @@
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/adapter-node": "^1.0.0-next.56",
     "@sveltejs/kit": "next",
+    "@types/ws": "^8.2.2",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.9.4",
@@ -23,7 +25,10 @@
   "type": "module",
   "dependencies": {
     "fast-safe-stringify": "^2.1.1",
+    "fp-ts": "^2.11.5",
     "socket.io": "^4.4.0",
-    "socket.io-client": "^4.4.0"
+    "socket.io-client": "^4.4.0",
+    "uuid": "^8.3.2",
+    "ws": "^8.2.3"
   }
 }

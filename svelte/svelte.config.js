@@ -15,6 +15,18 @@ const config = {
 
     // hydrate the <div id="svelte"> element in src/app.html
     target: "#svelte",
+    vite: {
+      //@ts-expect-error
+      ssr: {
+        noExternal: ["custom-electron-titlebar"],
+      },
+      resolve: {
+        alias: {
+          "xmlhttprequest-ssl":
+            "./node_modules/engine.io-client/lib/xmlhttprequest.js",
+        },
+      },
+    },
   },
 };
 

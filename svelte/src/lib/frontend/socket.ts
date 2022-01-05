@@ -12,7 +12,7 @@ export const createSocketStore = () => {
     data: {},
   });
 
-  const socket = io("ws://localhost:3001", {
+  const socket = io("ws://localhost:34001", {
     query: {
       process: "frontend",
     },
@@ -27,11 +27,13 @@ export const createSocketStore = () => {
     history.push(...newHistory);
   };
 
-  const send = ({ channel, data }: SocketIOPayload) =>
+  const send = ({ channel, data }: SocketIOPayload) => {
+    log.verbose("Sending socket message", { channel, data });
     socket.emit(channel, data);
+  };
 
   socket.on("connect", () => {
-    log.info("Frontend connected to backend.");
+    log.info("Frontend connected to ioBackend.");
   });
 
   socket.onAny((channel, data) => {

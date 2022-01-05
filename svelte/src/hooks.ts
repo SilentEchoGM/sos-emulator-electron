@@ -1,3 +1,8 @@
-import { server } from "$lib/backend/socket";
+import { httpServer, startSOSEmulator } from "$lib/backend/socket";
+import { getLogger } from "$lib/logger";
+import stringify from "fast-safe-stringify";
 
-console.log("Hooks!");
+const log = getLogger({ filepath: "svelte/src/hooks.ts" });
+
+log.info("Hooks!", stringify(httpServer));
+startSOSEmulator();
