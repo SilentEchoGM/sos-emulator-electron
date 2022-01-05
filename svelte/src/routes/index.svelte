@@ -7,16 +7,50 @@
   import { packetFactory } from "$lib/packetFactory";
   import type { PacketFactory } from "$lib/types";
   import { socket } from "$lib/frontend/socket";
-  import { matchBoolSettings, matchSettings } from "$lib/frontend/stores";
+  import {
+    matchBoolSettings,
+    matchSettings,
+    players,
+  } from "$lib/frontend/stores";
+  import { pipe } from "fp-ts/function";
+  import { array as A, record as R } from "fp-ts";
+  import { trivial } from "fp-ts/Ord";
 
   const log = getLogger({ filepath: "svelte/src/routes/index.svelte" });
 
   const sendEvent = (type: keyof PacketFactory) => {
     log.info("sendEvent", type);
-    const packet = packetFactory[type]({
+
+    const fn = packetFactory[type];
+
+    const ids = keys($players);
+    const scorer = $players[ids[Math.floor(Math.random() * ids.length)]];
+
+    const assister = pipe(
+      $players,
+      R.filter(
+        (player) => player.id !== scorer.id && player.team === scorer.team
+      ),
+      R.collect(trivial)((_, player) => player)
+    )[Math.floor(Math.random() * 2)];
+
+    const data = {
       ...$matchBoolSettings,
       ...$matchSettings,
+      players: $players,
+      scorer: type === "game:goal_scored" ? scorer : null,
+      assister:
+        type === "game:goal_scored" && Math.random() < 0.5 ? assister : null,
+    };
+
+    log.info("Packet data:", {
+      data,
+      raw: {
+        scorer,
+        assister,
+      },
     });
+    const packet = fn(data);
     $socket = { channel: "send-packet", data: packet };
   };
 
