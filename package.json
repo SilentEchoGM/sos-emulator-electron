@@ -29,7 +29,8 @@
     "build:electron:dev": "tsc",
     "build:electron:watch": "run-s \"build:electron:dev -- {1} {2}\" -- -w --preserveWatchOutput",
     "copy:electron:assets": "node scripts/postElectronBuild",
-    "start:sveltekit": "cd svelte && npm run dev"
+    "start:sveltekit": "cd svelte && npm run dev",
+    "postinstall": "cd svelte && npm i"
   },
   "nodemonConfig": {
     "watch": [
