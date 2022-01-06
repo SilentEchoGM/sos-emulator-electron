@@ -26,6 +26,7 @@
   "dependencies": {
     "fast-safe-stringify": "^2.1.1",
     "fp-ts": "^2.11.5",
+    "localforage": "^1.10.0",
     "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0",
     "uuid": "^8.3.2",

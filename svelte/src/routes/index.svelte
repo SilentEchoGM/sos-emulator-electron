@@ -15,6 +15,8 @@
   import { pipe } from "fp-ts/function";
   import { array as A, record as R } from "fp-ts";
   import { trivial } from "fp-ts/Ord";
+  import localForage from "localforage";
+  import type { SOS } from "$lib/types/sosPluginEvents";
 
   const log = getLogger({ filepath: "svelte/src/routes/index.svelte" });
 
@@ -55,8 +57,24 @@
     $socket = { channel: "send-packet", data: packet };
   };
 
+  console.log($players, $matchSettings, $matchBoolSettings);
+
   onMount(async () => {
     log.info("onMount");
+
+    //persist stores
+    localForage.getItem("players", (err, value: SOS.PlayersStore) => {
+      if (!value) return;
+      players.set(value);
+    });
+    localForage.getItem("bools", (err, value: any) => {
+      if (!value) return;
+      matchBoolSettings.set(value);
+    });
+    localForage.getItem("settings", (err, value: any) => {
+      if (!value) return;
+      matchSettings.set(value);
+    });
   });
 </script>
 
