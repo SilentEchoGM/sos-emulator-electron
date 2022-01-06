@@ -2,6 +2,7 @@ import type { SOS } from "$lib/types/sosPluginEvents";
 import { record as R, array as A, ord as Ord } from "fp-ts";
 import { pipe } from "fp-ts/function";
 import { getLocationAndRotation } from "./getLocationAndRotation";
+import { getPlatformId } from "./getPlatformId";
 
 export const getPlayer = (
   name: string = "Darman",
@@ -36,7 +37,7 @@ export const getPlayer = (
     name,
     onGround: false,
     onWall: false,
-    primaryID: "0",
+    primaryID: getPlatformId(),
     saves: 0,
     score: 0,
     shortcut: newId,
