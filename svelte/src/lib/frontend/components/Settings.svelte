@@ -2,7 +2,6 @@
   import { getLogger } from "$lib/logger";
   import { matchBoolSettings, matchSettings, players } from "../stores";
   import Toggle from "$lib/frontend/components/Toggle.svelte";
-  import { keys } from "fp-ts/lib/ReadonlyRecord";
 
   const log = getLogger({
     filepath: "svelte/src/lib/frontend/components/Settings.svelte",
@@ -12,6 +11,20 @@
     settings: $matchSettings,
     bools: $matchBoolSettings,
   });
+
+  const numberProps = [
+    "team",
+    "assists",
+    "boost",
+    "demos",
+    "goals",
+    "saves",
+    "score",
+    "shortcut",
+    "shots",
+    "speed",
+    "touches",
+  ];
 </script>
 
 <div class="settings-container column-content">
@@ -37,7 +50,11 @@
         <span>{prop}</span>
         <div class="input-container">
           <div class="input-accent">
-            <input bind:value={$players[id][prop]} />
+            {#if numberProps.includes(prop)}
+              <input bind:value={$players[id][prop]} type="number" />
+            {:else}
+              <input bind:value={$players[id][prop]} />
+            {/if}
           </div>
         </div>
       {/if}
