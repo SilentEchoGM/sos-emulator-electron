@@ -13,7 +13,7 @@
     players,
   } from "$lib/frontend/stores";
   import { pipe } from "fp-ts/function";
-  import { array as A, record as R } from "fp-ts";
+  import { record as R } from "fp-ts";
   import { trivial } from "fp-ts/Ord";
   import localForage from "localforage";
   import type { SOS } from "$lib/types/sosPluginEvents";
@@ -44,6 +44,10 @@
       assister:
         type === "game:goal_scored" && Math.random() < 0.5 ? assister : null,
       mainTarget: type === "game:statfeed_event" ? scorer : null,
+      target:
+        type === "game:update_state"
+          ? ids[Math.floor(Math.random() * ids.length)]
+          : null,
     };
 
     log.info("Packet data:", {
@@ -81,6 +85,7 @@
 <div class="container">
   <div class="column">
     <h3>Match Settings</h3>
+
     <Settings />
   </div>
   <div class="column">
