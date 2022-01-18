@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "cd .. & npm start",
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev --port 39254",
     "prebuild": "node ../scripts/cleanSvelteBuild",
     "build": "svelte-kit build",
     "package": "svelte-kit package",

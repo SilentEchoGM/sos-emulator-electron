@@ -28,7 +28,7 @@ export const ioBackend = new Server<
   DefaultEventsMap
 >(httpServer, {
   cors: {
-    origin: dev ? "http://localhost:3000" : "tbd",
+    origin: dev ? "http://localhost:39254" : "tbd",
   },
 });
 

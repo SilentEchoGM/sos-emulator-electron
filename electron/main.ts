@@ -26,12 +26,12 @@ const createWindow = () => {
   });
 
   win
-    .loadURL(dev ? "http://localhost:3000" : "http://www.google.com")
+    .loadURL(dev ? "http://localhost:39254" : "http://www.google.com")
     .catch((err) => {
       if (err) {
         setTimeout(() => {
           win
-            .loadURL(dev ? "http://localhost:3000" : "http://www.google.com")
+            .loadURL(dev ? "http://localhost:39254" : "http://www.google.com")
             .catch((err) => {
               log.error(
                 "Retried once, looks like the port is blocked or the Svelte dev server is having an issue.",
