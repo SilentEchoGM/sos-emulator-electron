@@ -8,5 +8,5 @@ export const getTarget = (
 ) => ({
   id,
   name,
-  team_num: team,
+  teamnum: team,
 });
