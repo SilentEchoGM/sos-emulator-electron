@@ -1,7 +1,8 @@
 <script>
   import { getLogger } from "$lib/logger";
-  import { matchBoolSettings, matchSettings, players } from "../stores";
+  import { gameId, matchBoolSettings, matchSettings, players } from "../stores";
   import Toggle from "$lib/frontend/components/Toggle.svelte";
+  import { v4 } from "uuid";
 
   const log = getLogger({
     filepath: "svelte/src/lib/frontend/components/Settings.svelte",
@@ -25,9 +26,16 @@
     "speed",
     "touches",
   ];
+
+  $: console.log("gameId", $gameId);
 </script>
 
 <div class="settings-container column-content">
+  <button
+    on:click={() => {
+      $gameId = v4();
+    }}>New Game Id</button>
+
   {#each Object.keys($matchSettings) as setting}
     <span>{setting}</span>
     <div class="input-container">
@@ -73,5 +81,9 @@
   span {
     text-align: center;
     font-family: monospace;
+  }
+
+  button {
+    grid-column: 1 / span 2;
   }
 </style>

@@ -1,9 +1,13 @@
+import { gameId } from "$lib/frontend/stores";
 import type { SOS } from "$lib/types/sosPluginEvents";
-import { v4 } from "uuid";
+import { get } from "svelte/store";
 import { getLocation } from "./utils/getLocation";
 import { getPlayer } from "./utils/getPlayer";
 
-export const getBallHit = ({ match_guid = v4(), player = getPlayer() }) =>
+export const getBallHit = ({
+  match_guid = get(gameId),
+  player = getPlayer(),
+}) =>
   ({
     data: {
       ball: {

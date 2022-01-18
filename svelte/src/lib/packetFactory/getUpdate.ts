@@ -1,5 +1,6 @@
+import { gameId } from "$lib/frontend/stores";
 import type { SOS } from "$lib/types/sosPluginEvents";
-import { v4 } from "uuid";
+import { get } from "svelte/store";
 import { getLocation } from "./utils/getLocation";
 import { getPlayerStore } from "./utils/getPlayerStore";
 
@@ -28,7 +29,7 @@ export const getUpdate = ({
   blueScore = 0,
   orangeScore = 0,
   time = 300,
-  match_guid = v4(),
+  match_guid = get(gameId),
 }: Options): SOS.Packet => ({
   event: "game:update_state",
   data: {

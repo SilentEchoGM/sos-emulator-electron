@@ -1,9 +1,10 @@
+import { gameId } from "$lib/frontend/stores";
 import type { SOS } from "$lib/types/sosPluginEvents";
-import { v4 } from "uuid";
+import { get } from "svelte/store";
 
 export const getMisc =
   (event: SOS.Event) =>
-  ({ match_guid = v4() }) =>
+  ({ match_guid = get(gameId) }) =>
     ({
       data: {
         match_guid,

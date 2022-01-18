@@ -4,6 +4,7 @@ import type { SOS } from "$lib/types/sosPluginEvents";
 import { getPlayerStore } from "$lib/packetFactory/utils/getPlayerStore";
 import localForage from "localforage";
 import { browser } from "$app/env";
+import { v4 } from "uuid";
 
 // const prettyMapNames = {
 //   "Stadium_P":
@@ -51,3 +52,5 @@ export const players: Writable<SOS.PlayersStore> = createPersistentStore(
   getPlayerStore(),
   "players"
 );
+
+export const gameId = createPersistentStore(v4(), "gameId");

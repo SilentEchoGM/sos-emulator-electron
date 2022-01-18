@@ -1,5 +1,6 @@
+import { gameId } from "$lib/frontend/stores";
 import type { SOS } from "$lib/types/sosPluginEvents";
-import { v4 } from "uuid";
+import { get } from "svelte/store";
 import { getMisc } from "./getMisc";
 
 export const getReplayStartPlain = () =>
@@ -8,5 +9,5 @@ export const getReplayStartPlain = () =>
     event: "game:replay_start",
   } as SOS.GameReplayStart);
 
-export const getReplayStartData = ({ match_guid = v4() }) =>
+export const getReplayStartData = ({ match_guid = get(gameId) }) =>
   getMisc("game:replay_start")({ match_guid }) as SOS.GameMisc;

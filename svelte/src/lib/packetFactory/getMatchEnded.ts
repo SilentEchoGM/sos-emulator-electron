@@ -1,9 +1,9 @@
-import type { TeamEnum } from "$lib/types/sosConsts";
+import { gameId } from "$lib/frontend/stores";
 import type { SOS } from "$lib/types/sosPluginEvents";
-import { v4 } from "uuid";
+import { get } from "svelte/store";
 
 export const getMatchEnded = ({
-  match_guid = v4(),
+  match_guid = get(gameId),
   winner_team_num = 0,
 }: SOS.MatchGUIDData & { winner_team_num: 0 | 1 }) =>
   ({
