@@ -1,8 +1,15 @@
 <script>
   import { getLogger } from "$lib/logger";
-  import { gameId, matchBoolSettings, matchSettings, players } from "../stores";
+  import {
+    gameId,
+    matchBoolSettings,
+    matchSettings,
+    players,
+    target,
+  } from "../stores";
   import Toggle from "$lib/frontend/components/Toggle.svelte";
   import { v4 } from "uuid";
+  import { getPlayerStore } from "$lib/packetFactory/utils/getPlayerStore";
 
   const log = getLogger({
     filepath: "svelte/src/lib/frontend/components/Settings.svelte",
@@ -36,6 +43,26 @@
       $gameId = v4();
     }}>New Game Id</button>
 
+  <button
+    on:click={() => {
+      matchSettings.set({
+        arena: "Stadium_P",
+        blueName: "BLUE",
+        orangeName: "ORANGE",
+        blueScore: 0,
+        orangeScore: 0,
+        time: 300,
+      });
+
+      matchBoolSettings.set({
+        isOT: false,
+        isReplay: false,
+      });
+
+      target.set("");
+      players.set(getPlayerStore());
+    }}>Reset all values</button>
+
   {#each Object.keys($matchSettings) as setting}
     <span>{setting}</span>
     <div class="input-container">
@@ -59,7 +86,7 @@
         <div class="input-container">
           <div class="input-accent">
             {#if numberProps.includes(prop)}
-              <input bind:value={$players[id][prop]} type="number" />
+              <input bind:value={$players[id][prop]} min="0" type="number" />
             {:else}
               <input bind:value={$players[id][prop]} />
             {/if}
