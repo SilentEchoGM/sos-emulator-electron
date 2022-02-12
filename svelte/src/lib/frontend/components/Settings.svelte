@@ -32,6 +32,7 @@
     "shots",
     "speed",
     "touches",
+    "cartouches",
   ];
 
   $: console.log("gameId", $gameId);
@@ -81,7 +82,7 @@
     <h6>{$players[id].name}</h6>
     <div />
     {#each Object.keys($players[id]) as prop}
-      {#if typeof $players[id][prop] !== "object"}
+      {#if $players[id][prop].toString() !== "[object Object]"}
         <span>{prop}</span>
         <div class="input-container">
           <div class="input-accent">
