@@ -26,6 +26,15 @@ export const createPersistentStore = (defaultValue: any, name: string) => {
   };
 };
 
+export const defaultMatchSettings = {
+  arena: "Stadium_P",
+  blueName: "BLUE",
+  orangeName: "ORANGE",
+  blueScore: 0,
+  orangeScore: 0,
+  time: 300,
+};
+
 export const matchSettings = createPersistentStore(
   {
     arena: "Stadium_P",
@@ -38,6 +47,8 @@ export const matchSettings = createPersistentStore(
   "settings"
 );
 
+export const target = createPersistentStore("none", "target");
+
 export const matchBoolSettings = createPersistentStore(
   {
     isOT: false,
@@ -45,8 +56,6 @@ export const matchBoolSettings = createPersistentStore(
   },
   "bools"
 );
-
-export const target = writable("");
 
 export const players: Writable<SOS.PlayersStore> = createPersistentStore(
   getPlayerStore(),

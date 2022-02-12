@@ -11,6 +11,7 @@
     matchBoolSettings,
     matchSettings,
     players,
+    target,
   } from "$lib/frontend/stores";
   import { pipe } from "fp-ts/function";
   import { record as R } from "fp-ts";
@@ -44,10 +45,7 @@
       assister:
         type === "game:goal_scored" && Math.random() < 0.5 ? assister : null,
       mainTarget: type === "game:statfeed_event" ? scorer : null,
-      target:
-        type === "game:update_state"
-          ? ids[Math.floor(Math.random() * ids.length)]
-          : null,
+      target: $target,
     };
 
     log.info("Packet data:", {

@@ -10,6 +10,7 @@
   import Toggle from "$lib/frontend/components/Toggle.svelte";
   import { v4 } from "uuid";
   import { getPlayerStore } from "$lib/packetFactory/utils/getPlayerStore";
+  import { keys } from "localforage";
 
   const log = getLogger({
     filepath: "svelte/src/lib/frontend/components/Settings.svelte",
@@ -77,7 +78,13 @@
     <span>{bool}</span>
     <Toggle bind:checked={$matchBoolSettings[bool]} />
   {/each}
-
+  <span>target</span>
+  <select class="input-accent" name="target" id="" bind:value={$target}>
+    <option value="none">none</option>
+    {#each Object.keys($players) as player}
+      <option value={player}>{player}</option>
+    {/each}
+  </select>
   {#each Object.keys($players) as id}
     <h6>{$players[id].name}</h6>
     <div />

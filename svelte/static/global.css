@@ -54,7 +54,8 @@ h3 {
   z-index: 1;
 }
 
-input {
+input,
+select {
   position: relative;
   text-align: center;
   vertical-align: middle;
