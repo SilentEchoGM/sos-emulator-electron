@@ -61,7 +61,7 @@
         isReplay: false,
       });
 
-      target.set("");
+      target.set("none");
       players.set(getPlayerStore());
     }}>Reset all values</button>
 
