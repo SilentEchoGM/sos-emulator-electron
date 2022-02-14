@@ -41,7 +41,7 @@ export const getUpdate = ({
         speed: 0,
         team: 255,
       },
-      hasTarget: false,
+      hasTarget: target === "none" || target === "" ? false : true,
       hasWinner: false,
       isOT,
       isReplay,
