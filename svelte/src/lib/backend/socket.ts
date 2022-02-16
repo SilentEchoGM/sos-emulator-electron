@@ -5,7 +5,6 @@ import http from "http";
 import WebSocket, { WebSocketServer } from "ws";
 import type { SOS } from "$lib/types/sosPluginEvents";
 import type { DefaultEventsMap } from "socket.io/dist/typed-events";
-import stringify from "fast-safe-stringify";
 
 interface FrontendToBackendEvents {
   "send-packet": (packet: SOS.Packet) => void;
@@ -28,7 +27,7 @@ export const ioBackend = new Server<
   DefaultEventsMap
 >(httpServer, {
   cors: {
-    origin: dev ? "http://localhost:39254" : "tbd",
+    origin: dev ? "http://localhost:39254" : "*",
   },
 });
 

@@ -5,7 +5,7 @@
     "start": "cd .. & npm start",
     "dev": "svelte-kit dev --port 39254",
     "prebuild": "node ../scripts/cleanSvelteBuild",
-    "build": "svelte-kit build",
+    "build": "cross-env PORT=39255 svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",

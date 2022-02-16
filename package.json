@@ -9,13 +9,17 @@
     "url": "http://twitter.com/silentechode"
   },
   "dependencies": {
+    "axios": "^0.26.0",
+    "electron-is-dev": "^2.0.0",
     "electron-updater": "^4.6.1",
     "fs-extra": "^10.0.0",
     "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
+    "@types/node": "^14.18.1",
     "cross-env": "^7.0.3",
     "electron": "^16.0.5",
+    "electron-builder": "^22.14.13",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "sudo-prompt": "^9.2.1",
@@ -32,7 +36,16 @@
     "build:electron:watch": "run-s \"build:electron:dev -- {1} {2}\" -- -w --preserveWatchOutput",
     "copy:electron:assets": "node scripts/postElectronBuild",
     "start:sveltekit": "cd svelte && npm run dev",
-    "postinstall": "cd svelte && npm i"
+    "build:sveltekit": "cd svelte && npm run build",
+    "build": "run-s -l build:electron build:sveltekit",
+    "install:sveltekit": "cd svelte && npm i",
+    "dist:update:deps": "electron-builder install-app-deps",
+    "postinstall": "run-s -l install:sveltekit dist:update:deps",
+    "dist:builder:pack": "electron-builder --dir",
+    "dist:builder": "electron-builder",
+    "predist": "run-s build",
+    "dist": "run-s -l dist:builder",
+    "check:sveltekit": "cd svelte && npm run check"
   },
   "nodemonConfig": {
     "watch": [
@@ -63,7 +76,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "http://localhost:42421"
+        "url": "http://sosemu.silentecho.eu/upload"
       }
     ]
   }

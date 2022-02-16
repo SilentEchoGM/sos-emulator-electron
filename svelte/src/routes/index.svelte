@@ -13,7 +13,7 @@
     players,
     target,
   } from "$lib/frontend/stores";
-  import { pipe } from "fp-ts/function";
+  import { pipe } from "fp-ts/lib/function";
   import { record as R } from "fp-ts";
   import { trivial } from "fp-ts/Ord";
   import localForage from "localforage";
