@@ -9,6 +9,9 @@ const config = {
   preprocess: preprocess(),
 
   kit: {
+    prerender: {
+      enabled: false,
+    },
     adapter: node({
       out: "../build/svelte",
     }),
