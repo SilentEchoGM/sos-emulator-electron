@@ -5,14 +5,14 @@ import { getPlayer } from "./utils/getPlayer";
 import { getTarget } from "./utils/getTarget";
 
 type Options = {
-  type: SOS.StatFeedEvent;
+  statType: SOS.StatFeedEvent;
   mainTarget: SOS.Player;
   secondaryTarget: SOS.Player | null;
   match_guid: string;
 };
 
 export const getStatFeedEvent = ({
-  type = "Shot on Goal",
+  statType = "Shot on Goal",
   mainTarget = getPlayer(),
   secondaryTarget = null,
   match_guid = get(gameId),
@@ -22,7 +22,7 @@ export const getStatFeedEvent = ({
       main_target: getTarget(mainTarget),
       secondary_target: secondaryTarget ?? { id: "", name: "", teamnum: -1 },
       match_guid,
-      type,
+      type: statType,
     },
     event: "game:statfeed_event",
   } as SOS.GameStatFeedEvent);

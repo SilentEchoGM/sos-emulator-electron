@@ -48,6 +48,7 @@ export const matchSettings = createPersistentStore(
 );
 
 export const target = createPersistentStore("none", "target");
+export const stat = createPersistentStore("Shot on Goal", "stat");
 
 export const matchBoolSettings = createPersistentStore(
   {

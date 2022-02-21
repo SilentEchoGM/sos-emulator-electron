@@ -11,6 +11,7 @@
     matchBoolSettings,
     matchSettings,
     players,
+    stat,
     target,
   } from "$lib/frontend/stores";
   import { pipe } from "fp-ts/lib/function";
@@ -40,6 +41,7 @@
     const data = {
       ...$matchBoolSettings,
       ...$matchSettings,
+      statType: $stat,
       players: $players,
       scorer: type === "game:goal_scored" ? scorer : null,
       assister:
